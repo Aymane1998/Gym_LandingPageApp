@@ -3,10 +3,15 @@ import { NavbarMenu } from "../Data/data"
 import { CiSearch } from "react-icons/ci"
 import { FaDumbbell } from "react-icons/fa"
 import { PiShoppingCartThin } from "react-icons/pi"
+import { RxCross1 } from 'react-icons/rx';
 import { MdMenu } from "react-icons/md"
+import { useState } from "react"
+import { motion } from "framer-motion";
+import ResponsiveMenu from "./ResponsiveMenu"
 
 
 const Navbar = () => {
+  const [open,setOpen] = useState(false);
   return (
     <>
       <nav>
@@ -33,7 +38,7 @@ const Navbar = () => {
             </ul>
           </div>
           {/* Icons Section */}
-          <div>
+          <div className="flex flex-row justify-center items-center">
             <button className="text-2xl hover:bg-primary hover:text-white rounded-full p-2">
               <CiSearch />
             </button>
@@ -42,10 +47,18 @@ const Navbar = () => {
             </button>
           </div>
           {/* Mobile Hamburger Menu Section */}
+          <div className="md:hidden" onClick={() => setOpen(!open)}>
+              {open ? (
+                <RxCross1 className="text-4xl" />
+              ) : (
+                <MdMenu className="text-4xl" />
+              )}{' '}
+          </div>
         </div>
       </nav>
 
       {/* Mobile sideBar Section */}
+      <ResponsiveMenu open={open} />
     </>
   );
   
